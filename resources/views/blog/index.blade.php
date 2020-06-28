@@ -1,45 +1,32 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Blog') }}</title>
+@extends('layouts.app')
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content')
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body class="antialiased font-sans bg-gray-100">
-
-<header class="bg-gray-800">
-	<div class="lg:max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
-		<div class="flex items-center justify-between h-16">
-			<div class="flex items-center">
-				<div class="flex-shrink-0">
-            		<a href="{{route('home')}}"><span class="text-white">Blog</span></a>
-          		</div>
-			</div>
-		
-		</div>
-	</div>
-</header>
 
 <main>
   <div class="container mx-auto px-5 lg:max-w-screen-lg mt-20">
+    
+    <x-alert/>
+    <x-error/>
 
   <div class="flex flex-col">
+    
 
       <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-        	<div class="px-4 py-4 border-b border-gray-200 sm:px-6 bg-white">
+        	<div class="px-4 py-4 sm:px-6 bg-white">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 My Posts
               </h3>
-
+             <div class="sm:flex sm:flex-row-reverse ">
+               <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:mt-0 sm:w-auto">
+              <a href="{{route('post.create')}}" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                Publish
+              </a>
+            </span>
+             </div>
             </div>
+
           <table class="min-w-full">
             <thead>
               <tr>
@@ -54,20 +41,22 @@
               </tr>
             </thead>
             <tbody class="bg-white">
+              @foreach ($posts as $post)
+                  
               <tr>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div class="text-sm leading-5 font-medium text-gray-900">How to Start a Blog with TailwindCSS</div>
+                  <div class="text-sm leading-5 font-medium text-gray-900">{{$post->title}}</div>
                 </td> 
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div class="text-sm leading-5 font-medium text-gray-900">2020-06-28</div>
+                  <div class="text-sm leading-5 font-medium text-gray-900">{{$post->publication_date->format('Y-m-d')}}</div>
                 </td>
 
 
                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Show</a>
+                <a href="{{route('post',$post->slug)}}" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Show</a>
                 </td>
               </tr>
-      
+               @endforeach
              
            
             </tbody>
@@ -79,5 +68,5 @@
 </div>
         </main>
 
-</body>
-</html>
+@endsection
+

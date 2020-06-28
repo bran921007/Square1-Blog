@@ -28,6 +28,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    // public function getPublicationDateAttribute()
+    // {
+    //     return $this->publication_date;
+    // }
+
     public function setSlugAttribute($title)
     {
         $slg =  Str::slug($title, "-") . '-' . random_int(2,1000);

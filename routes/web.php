@@ -20,11 +20,13 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/order', 'HomeController@sortByPublicationDate')->name('order');
 Route::get('/post/{slug}', 'HomeController@getPosts')->name('post');
-Route::get('/home', 'PostController@index')->name('dashboard');
-
+// Route::get('/home', 'PostController@index')->name('dashboard');
+Route::post('/post/store', 'PostController@store')->name('post.store');
 Route::group(['middleware' => 'auth','prefix'=>'panel'], function () {
 
-    
+    Route::get('/home', 'PostController@index')->name('dashboard');
+    Route::get('/post/create', 'PostController@create')->name('post.create');
+    // Route::post('/post/store', 'PostController@store')->name('post.store');
 
 });
 

@@ -17,7 +17,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with('author')->where('user_id',auth()->user()->id)->get();
-        return view('dashboard', compact('posts'));
+        return view('blog.index', compact('posts'));
+
     }
 
     /**
@@ -27,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.create');
+        return view('blog.create');
     }
 
     /**
@@ -38,8 +39,21 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        Post::create($request->except('_token'));
-        return redirect()->route('dashboard');
+        $post = new Post([
+            'title' => $request->title,
+            'slug'  => $request->title,
+            'description' =>  $request->description,
+            'publication_date' => now(),
+            //    'user_id ' => auth()->user()->id
+        ]);
+        $auth = auth()->user();
+        $user = User::find($auth->id);
+        // dd($user->posts);
+        $user->posts()->save($post);
+
+        // Post::create($post);
+
+        return redirect()->route('dashboard')->with('status','Post created successfully');
     }
 
     /**

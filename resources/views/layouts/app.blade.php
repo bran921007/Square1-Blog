@@ -12,41 +12,24 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-
-  <div class="lg:max-w-screen-lg px-5 mx-auto mb-10">
-      <!-- header -->
-      <header class="flex items-center justify-between py-5">
-        <a href="{{route('home')}}" class="px-2 lg:px-0 font-bold">
-         <span class="font-semibold text-xl tracking-tight">S1 Blog</span>
-      </a>
-     
-      <ul class="hidden md:inline-flex items-center">
-          <li class="px-2 md:px-4">
-            <a href="{{route('home')}}" class="text-gray-800 font-semibold no-underline hover:underline"> Home </a>
-        </li>
-        @auth
-             <li class="px-2 md:px-4 hidden md:block">
-            <a href="{{route('login')}}" class="text-gray-500 font-semibold no-underline hover:underline"> {{auth()->user()->full_name}} </a>
-        </li>
-        @else
-          <li class="px-2 md:px-4 hidden md:block">
-            <a href="{{route('login')}}" class="text-gray-500 font-semibold no-underline hover:underline"> Login </a>
-        </li>
-        <li class="px-2 md:px-4 hidden md:block">
-            <a href="{{route('register')}}" class="text-gray-500 font-semibold no-underline hover:underline"> Register </a>
-        </li>
-
-        @endauth
+<body class="antialiased font-sans bg-gray-100">
+  <div id="app">
+    
+    <header class="bg-gray-800">
+    <div class="lg:max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <a href="{{route('home')}}"><span class="text-xl text-white font-semibold uppercase tracking-wide">Blog</span></a>
+                </div>
+            </div>
         
-    </ul>
+        </div>
+    </div>
+</header>
 
-    </header>
-    <!-- End header -->
-  </div>
-
-
+  
     @yield('content')
-
+  </div>
 </body>
-</html>
+</html>  
