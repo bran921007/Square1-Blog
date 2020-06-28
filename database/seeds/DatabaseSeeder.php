@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Schema;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,5 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
+        
+        // DB::table('posts')->truncate();
+        
+        $this->call(PostSeeder::class);
     }
 }
