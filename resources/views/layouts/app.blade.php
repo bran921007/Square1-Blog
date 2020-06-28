@@ -25,12 +25,20 @@
           <li class="px-2 md:px-4">
             <a href="{{route('home')}}" class="text-gray-800 font-semibold no-underline hover:underline"> Home </a>
         </li>
-        <li class="px-2 md:px-4 hidden md:block">
+        @auth
+             <li class="px-2 md:px-4 hidden md:block">
+            <a href="{{route('login')}}" class="text-gray-500 font-semibold no-underline hover:underline"> {{auth()->user()->full_name}} </a>
+        </li>
+        @else
+          <li class="px-2 md:px-4 hidden md:block">
             <a href="{{route('login')}}" class="text-gray-500 font-semibold no-underline hover:underline"> Login </a>
         </li>
         <li class="px-2 md:px-4 hidden md:block">
             <a href="{{route('register')}}" class="text-gray-500 font-semibold no-underline hover:underline"> Register </a>
         </li>
+
+        @endauth
+        
     </ul>
 
     </header>

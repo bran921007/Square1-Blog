@@ -15,6 +15,8 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+        if(!session()->has('sort')) session()->put('sort','desc');
+       
     }
 
     /**
@@ -24,7 +26,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('author')->get();
+        $posts = Post::with('author')->orderBy('publication_date', session('sort'))->get();
+       
         return view('home',compact('posts'));
+    }
+
+    public function getPosts($slug)
+    {
+        
+        $post = Post::with('author')->where('slug', $slug)->first();
+
+        
+        return view('post',compact('post'));
+    }
+
+    public function sortByPublicationDate(Request $request)
+    {
+        session()->forget('sort');
+        session()->put('sort', $request->sort);
+
+        return redirect()->back();
     }
 }
