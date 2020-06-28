@@ -16,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with('author')->where('user_id',auth()->user()->id)->get();
+        return view('dashboard', compact('posts'));
     }
 
     /**
@@ -26,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.create');
     }
 
     /**
@@ -37,7 +38,8 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        //
+        Post::create($request->except('_token'));
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -48,7 +50,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('dashboard.show',compact('post'));
     }
 
     /**

@@ -13,15 +13,32 @@ class Post extends Model
         'publication_date'=>'datetime'
     ];
 
+    public function cacheKey()
+    {
+        return md5(sprintf(
+            "%s.%s.%s",
+            $this->getTable(),
+            $this->getKey(),
+            $this->updated_at->timestamp
+        ));
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function setSlugAttribute($slug)
+    public function setSlugAttribute($title)
     {
-        $slug =  Str::slug($this->title, "-") . '-' . random_int(2,1000);
+        $slg =  Str::slug($title, "-") . '-' . random_int(2,1000);
 
-        return $this->attributes['slug'] = $slug;
+        return $this->attributes['slug'] = $slg ;
+    }
+
+    public function getSlugAttribute($slug)
+    {
+        // return  Str::slug($this->title, "-") . '-' . random_int(2,1000);
+
+        return $this->attributes['slug'];
     }
 }

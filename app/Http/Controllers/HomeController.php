@@ -31,12 +31,12 @@ class HomeController extends Controller
         return view('home',compact('posts'));
     }
 
+    
     public function getPosts($slug)
     {
         
         $post = Post::with('author')->where('slug', $slug)->first();
-
-        
+    
         return view('post',compact('post'));
     }
 
