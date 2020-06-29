@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Cache;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,10 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Post $post)
     {
-        // $this->middleware('auth');
         if(!session()->has('sort')) session()->put('sort','desc');
+        $this->post = $post;
        
     }
 
@@ -26,13 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('author')->orderBy('publication_date', session('sort'))->get();
+        $currentPage = request()->get('page', 1);
+
+        $posts = Cache::remember($this->post->cacheKey() . '-' . $currentPage, 60, function () {
+            return Post::with('author')
+                    ->orderBy('publication_date', session('sort'))
+                    ->paginate(15);
+        });
+        
        
         return view('home',compact('posts'));
     }
 
     
-    public function getPosts($slug)
+    public function getPost($slug)
     {
         
         $post = Post::with('author')->where('slug', $slug)->first();

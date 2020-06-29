@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use Cache;
 
 class PostController extends Controller
 {
@@ -14,9 +15,26 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
+
     public function index()
     {
-        $posts = Post::with('author')->where('user_id',auth()->user()->id)->get();
+        $currentPage = request()->get('page',1);
+
+       $posts = Cache::remember($this->post->cacheKey().'-'.$currentPage,60,function(){
+
+            return $posts = Post::with('author')
+                                ->where('user_id', auth()->user()->id)
+                                // ->get();
+                                ->paginate(15);
+       });
+        
+                   
         return view('blog.index', compact('posts'));
 
     }
@@ -46,12 +64,10 @@ class PostController extends Controller
             'publication_date' => now(),
             //    'user_id ' => auth()->user()->id
         ]);
-        $auth = auth()->user();
-        $user = User::find($auth->id);
-        // dd($user->posts);
+       
+        $user = auth()->user();
+       
         $user->posts()->save($post);
-
-        // Post::create($post);
 
         return redirect()->route('dashboard')->with('status','Post created successfully');
     }
@@ -68,37 +84,5 @@ class PostController extends Controller
         return view('dashboard.show',compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   
 }
