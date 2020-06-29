@@ -7,10 +7,6 @@
 @include('admin.partials.header')
 <main>
 	<div class="container mx-auto px-5 lg:max-w-screen-lg mt-20">
-
-		<x-alert/>
-	    <x-error/>
-	
 		<div class="bg-white shadow overflow-hidden sm:rounded-lg">
 			<div class="px-4 py-5 border-b border-gray-200 sm:px-6">
 				<h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -24,13 +20,19 @@
 						<label class="block text-gray-700 text-sm mb-2" for="title">
 							Title
 						</label>
-						<input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" id="title" name="title" type="text" placeholder="Title of Post">
+						<input class="bg-white focus:outline-none focus:shadow-outline border @error('title') border-red-500 @enderror border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" id="title" name="title" type="text" placeholder="Title of Post" value="{{old('title')}}">
+						@error('title')
+				         <p class="text-red-500 text-xs italic">{{ $message }}</p>
+				        @enderror
 					</div>
 					<div class="mb-4">
 						<label class="block text-gray-700 text-sm mb-2" for="description">
 							Description
 						</label>
-						<textarea class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal h-40" id="description" name="description" placeholder="Description" ></textarea>
+						<textarea class="bg-white focus:outline-none focus:shadow-outline border @error('description') border-red-500 @enderror border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal h-40" id="description" name="description" placeholder="Description" >{{old('description')}}</textarea>
+						@error('description')
+				         <p class="text-red-500 text-xs italic">{{ $message }}</p>
+				        @enderror
 					</div>
 					<div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-100">
 						<span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:mt-0 sm:w-auto">
