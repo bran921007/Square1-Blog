@@ -45,14 +45,4 @@ class Post extends Model
         return $this->attributes['slug'];
     }
     
-    protected static function booted()
-    {
-        static::creating(function ($post) {
-            Cache::flush();
-        });
-        
-        static::saving(function ($post) {
-            Cache::flush();
-        });
-    }
 }

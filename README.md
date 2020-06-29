@@ -12,6 +12,14 @@ Install Dependencies
 composer install
 ```
 
+You will need to install redis-server and predis/redis package for Redis in Laravel. Check [Windows the documentation](https://redislabs.com/ebook/appendix-a/a-3-installing-on-windows/a-3-2-installing-redis-on-window/) or [Mac documentation](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298) of redis.
+
+Then run this command to install the Redis PHP extension
+
+```
+pecl install redis
+```
+
 Copy the .env.example into .env
 
 ```
