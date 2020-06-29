@@ -22,8 +22,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::post('/order', 'HomeController@sortByPublicationDate')->name('order');
 Route::get('/post/{slug}', 'HomeController@getPost')->name('post');
 
-// Route::get('testing', 'PostController@importExternalPosts');
-
 Route::group(['middleware' => 'auth','prefix'=>'panel'], function () {
 
     Route::get('/home', 'PostController@index')->name('dashboard');

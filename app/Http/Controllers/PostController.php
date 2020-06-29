@@ -89,13 +89,5 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function importExternalPosts()
-    {
-        // AutoImportPosts::dispatch();
-        retry(20, function () {
-            dispatch(new AutoImportPosts());
-        }, 200);
-    }
-
    
 }

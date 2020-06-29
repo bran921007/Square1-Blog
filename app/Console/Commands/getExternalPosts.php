@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\AutoImportPosts;
 use Illuminate\Console\Command;
 use App\Post;
 use App\User;
@@ -39,6 +40,7 @@ class getExternalPosts extends Command
      */
     public function handle()
     {
+
         $json = json_decode(file_get_contents(config('api_blog.external_blog.url')), true);
 
         $newPosts = collect($json['data']);
