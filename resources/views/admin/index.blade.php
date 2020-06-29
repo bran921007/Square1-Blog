@@ -66,7 +66,7 @@
                   <div class="text-sm leading-5 font-medium text-gray-900">{{$post->title}}</div>
                 </td> 
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div class="text-sm leading-5 font-medium text-gray-900">{{$post->publication_date->format('Y-m-d')}}</div>
+                  <div class="text-sm leading-5 font-medium text-gray-900">{{$post->publication_date->format('M d, Y')}}</div>
                 </td>
 
 

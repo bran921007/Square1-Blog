@@ -35,7 +35,7 @@
 
             <div class="flex items-center text-sm">
                 <span class="ml-2">{{$post->author->name}}</span>
-                <span class="ml-auto">{{$post->publication_date}}</span>
+                <span class="ml-auto">{{$post->publication_date->format('M d, Y')}}</span>
             </div>
         </div>
         </a>
