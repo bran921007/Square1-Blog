@@ -19,7 +19,7 @@ class HomeController extends Controller
     {
         if(!session()->has('sort')) session()->put('sort','desc');
         $this->post = $post;
-       
+    
     }
 
     /**
@@ -37,7 +37,7 @@ class HomeController extends Controller
                     ->paginate(15);
         });
         
-       
+    
         return view('blog.home',compact('posts'));
     }
 
@@ -47,8 +47,8 @@ class HomeController extends Controller
 
         $post = Cache::remember('post_'.$slug, 60, function () use ($slug) {
             return Post::with('author')
-                           ->where('slug', $slug)
-                           ->first();
+                        ->where('slug', $slug)
+                        ->first();
         });
         
     
