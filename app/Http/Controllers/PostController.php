@@ -27,15 +27,14 @@ class PostController extends Controller
     public function index()
     {
         
-        $currentPage = request()->get('page',1);
+        // $currentPage = request()->get('page',1);
 
-       $posts = Cache::remember($this->post->cacheKey().'-'.$currentPage,60,function(){
+    //    $posts = Cache::remember($this->post->cacheKey().'-'.$currentPage,60,function(){
 
-            return $posts = Post::with('author')
+            $posts = Post::with('author')
                                 ->where('user_id', auth()->user()->id)
-                                // ->get();
-                                ->paginate(15);
-       });
+                                ->paginate(10);
+    //    });
         
                    
         return view('admin.index', compact('posts'));

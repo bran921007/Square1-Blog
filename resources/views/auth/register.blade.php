@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@extends('admin.partials.header')
+@include('admin.partials.header')
 <div class="container mx-auto px-5 lg:max-w-screen-md mt-20 flex items-center justify-center">
 	<div class="max-w-md w-full">
 

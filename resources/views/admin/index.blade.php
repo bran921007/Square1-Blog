@@ -8,7 +8,7 @@
 
 
 <main>
-  <div class="container mx-auto px-5 lg:max-w-screen-lg mt-20">
+  <div class="container mx-auto px-5 lg:max-w-screen-lg mt-20 mb-10">
     
     <x-alert/>
     <x-error/>
@@ -71,10 +71,13 @@
            
             </tbody>
           </table>
-    
+          <div class=" px-4 py-4 sm:px-6 bg-white">
+           {{ $posts->links() }}
+          </div>
         </div>
-        {{ $posts->links() }}
+        
       </div>
+      
     </div>
 </div>
         </main>

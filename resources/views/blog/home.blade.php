@@ -14,8 +14,8 @@
      @csrf
       <select class="   bg-white border border-gray-400 hover:border-gray-500 px-4 py-3 rounded focus:outline-none focus:shadow-outline" name="sort" id="" onchange='if(this.value != 0) { this.form.submit(); }'>
         <option value="0">Filter by Publication Date</option>
-        <option value="asc" {{ session()->get('sort') == 'asc' ? 'selected' : '' }}>Lastest Posts</option>
-        <option value="desc" {{ session()->get('sort') == 'desc' ? 'selected' : '' }}>Newest posts</option>
+        <option value="asc" {{ session()->get('sort') == 'asc' ? 'selected' : '' }}>Oldest Posts</option>
+        <option value="desc" {{ session()->get('sort') == 'desc' ? 'selected' : '' }}>Lastest Posts</option>
       </select>
      </form>
   </div>
@@ -40,7 +40,9 @@
         </div>
         </a>
         @endforeach
-   {{ $posts->links() }}
+   <div class="mb-5">
+     {{ $posts->links() }}
+   </div>
 </div>
 
 

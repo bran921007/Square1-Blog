@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@extends('admin.partials.header')
+@include('admin.partials.header')
 <div class="container mx-auto px-5 lg:max-w-screen-md mt-20 flex items-center justify-center">
   <div class="max-w-md w-full">
   <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{{ route('password.email') }}">
