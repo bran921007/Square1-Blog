@@ -28,7 +28,8 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id')
+                         ->withDefault(['name'=> 'Anonymous','lastname'=>'']) ;
     }
 
     // public function getPublicationDateAttribute()
@@ -45,7 +46,6 @@ class Post extends Model
 
     public function getSlugAttribute($slug)
     {
-        // return  Str::slug($this->title, "-") . '-' . random_int(2,1000);
 
         return $this->attributes['slug'];
     }

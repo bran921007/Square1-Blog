@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -9,12 +10,19 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        factory(App\User::class, 3)
-            ->create()
-            ->each(function ($user) {
-                $user->posts()->save(factory(App\Post::class)->make());
-            });
+        $admin = [
+            'name'     => 'Jessica',
+            'lastname' => 'Alba',
+            'email'    => 'admin@admin.com',
+            'password' => \Hash::make('123456'),
+            'role'     => 'admin'
+        ];
+
+        User::firstOrCreate($admin);
+
+       
     }
 }

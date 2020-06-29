@@ -8,10 +8,9 @@
      @csrf
       <select name="sort" id="" onchange='if(this.value != 0) { this.form.submit(); }'>
         <option value="0">Filter by Publication Date</option>
-        <option value="asc" {{ session()->get('sort') == 'asc' ? 'selected' : '' }}>Newest posts</option>
-        <option value="desc" {{ session()->get('sort') == 'desc' ? 'selected' : '' }}>Lastest Posts</option>
+        <option value="asc" {{ session()->get('sort') == 'asc' ? 'selected' : '' }}>Lastest Posts</option>
+        <option value="desc" {{ session()->get('sort') == 'desc' ? 'selected' : '' }}>Newest posts</option>
       </select>
-  {{-- <noscript><input type="submit" value="Submit"></noscript> --}}
   </form>
 </div>
 

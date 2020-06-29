@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->index(['slug', 'publication_date']);    
 
             $table->timestamps();
         });

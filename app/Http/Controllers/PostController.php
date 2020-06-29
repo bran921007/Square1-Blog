@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use Cache;
+use Illuminate\Support\Facades\Redis;
+use App\Jobs\AutoImportPosts;
 
 class PostController extends Controller
 {
@@ -24,6 +26,7 @@ class PostController extends Controller
 
     public function index()
     {
+        
         $currentPage = request()->get('page',1);
 
        $posts = Cache::remember($this->post->cacheKey().'-'.$currentPage,60,function(){
@@ -82,6 +85,14 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         return view('dashboard.show',compact('post'));
+    }
+
+    public function importExternalPosts()
+    {
+        // AutoImportPosts::dispatch();
+        retry(20, function () {
+            dispatch(new AutoImportPosts());
+        }, 200);
     }
 
    
