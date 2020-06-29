@@ -1,6 +1,9 @@
-@extends('layouts.blog')
+@extends('layouts.app')
+
+@section('title', 'Home')
 
 @section('content')
+@include('layouts.partials.header')
 
 <div class="container">
    

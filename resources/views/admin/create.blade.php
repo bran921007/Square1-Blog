@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'New Blog Post')
+@section('body', 'antialiased font-sans bg-gray-100')
+
 @section('content')
+@include('admin.partials.header')
 <main>
 	<div class="container mx-auto px-5 lg:max-w-screen-lg mt-20">
 

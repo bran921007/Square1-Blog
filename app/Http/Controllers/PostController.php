@@ -38,7 +38,7 @@ class PostController extends Controller
        });
         
                    
-        return view('blog.index', compact('posts'));
+        return view('admin.index', compact('posts'));
 
     }
 
@@ -49,7 +49,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('blog.create');
+        return view('admin.create');
     }
 
     /**

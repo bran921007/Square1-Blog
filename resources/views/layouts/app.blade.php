@@ -5,31 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Blog') }}</title>
+    <title>{{ config('app.name', 'S1 Blog') }} - @yield('title')</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body class="antialiased font-sans bg-gray-100">
-  <div id="app">
     
-    <header class="bg-gray-800">
-    <div class="lg:max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <a href="{{route('home')}}"><span class="text-xl text-white font-semibold uppercase tracking-wide">Blog</span></a>
-                </div>
-            </div>
-        
-        </div>
-    </div>
-</header>
-
-  
+</head>
+<body class="@yield('body')">
+  <div id="app">
     @yield('content')
   </div>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </body>
 </html>  

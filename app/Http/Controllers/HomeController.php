@@ -38,7 +38,7 @@ class HomeController extends Controller
         });
         
        
-        return view('home',compact('posts'));
+        return view('blog.home',compact('posts'));
     }
 
     
@@ -52,7 +52,7 @@ class HomeController extends Controller
         });
         
     
-        return view('post',compact('post'));
+        return view('blog.post',compact('post'));
     }
 
     public function sortByPublicationDate(Request $request)
