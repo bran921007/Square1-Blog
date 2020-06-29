@@ -9,49 +9,49 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = [
         'name','lastname', 'email', 'password',
     ];
-
+    
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    * The attributes that should be hidden for arrays.
+    *
+    * @var array
+    */
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    * The attributes that should be cast to native types.
+    *
+    * @var array
+    */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
-
+    
     public function getFullNameAttribute()
     {
         return $this->name . ' ' . $this->lastname;
     }
-
+    
     public function getIsAdminAttribute()
     {
         return $this->role == 'admin';
     }
-
+    
     public function hasRole($role)
     {
         return $this->role == $role;
