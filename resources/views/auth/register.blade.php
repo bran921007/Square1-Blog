@@ -5,16 +5,25 @@
 <div class="container mx-auto px-5 lg:max-w-screen-md mt-20 flex items-center justify-center">
 	<div class="max-w-md w-full">
 
-		<form form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{{ route('register') }}">
-			<h3 class=" text-2xl text-center">Create an Account!</h3>
+		<form form class="bg-white shadow-md rounded px-8 pt-4 pb-8 mb-4" method="POST" action="{{ route('register') }}">
+			<h3 class="text-2xl text-center mb-2">Create an Account!</h3>
 			@csrf
 			 <div class="flex flex-wrap -mx-3 mb-6">
-				<div class="w-full px-3">
-				  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
+				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+				<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
 					{{ __('Name') }}
 				  </label>
-				  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('name') border-red-500 @enderror border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+				<input class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('name') border-red-500 @enderror border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
 				  @error('name')
+				 <p class="text-red-500 text-xs italic">{{ $message }}</p>
+				 @enderror
+			</div>
+			<div class="w-full md:w-1/2 px-3">
+			  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="lastname">
+					{{ __('Last Name') }}
+				  </label>
+			<input class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('lastname') border-red-500 @enderror border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="lastname" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus placeholder="Last Name">
+				  @error('lastname')
 				 <p class="text-red-500 text-xs italic">{{ $message }}</p>
 				 @enderror
 				</div>
