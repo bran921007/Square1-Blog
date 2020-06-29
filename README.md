@@ -1,18 +1,9 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
 ## How to install
 
 Clone the project
 
 ```
-https://github.com/bran921007/Square1-Blog.git
+git clone https://github.com/bran921007/Square1-Blog.git
 ```
 
 Install Dependencies
@@ -68,4 +59,24 @@ php artisan queue:work
 ```
 php artisan schedule:run
 ```
+##  Testing
+
+Pest is a new Laravel framework for testing, a friendly one, based on PHPUnit.
+
+In order to run this test:
+
+```
+./vendor/bin/pest
+```
+![Tests](testing.png "Testing")
+
+## Blog platform
+
+Homepage
+
+![Home](homepage.png "Home")
+
+Admin Panel
+
+![Admin](admin.png "Admin")
 
