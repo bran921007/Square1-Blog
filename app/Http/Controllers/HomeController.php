@@ -29,7 +29,7 @@ class HomeController extends Controller
         $posts = Cache::remember($this->post->cacheKey() . '-' . $currentPage, 60, function () {
             return Post::with('author')
             ->orderBy('publication_date', session('sort'))
-            ->paginate(15);
+            ->paginate(10);
         });
         
         return view('blog.home',compact('posts'));

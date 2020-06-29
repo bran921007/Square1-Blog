@@ -9,7 +9,7 @@ git clone https://github.com/bran921007/Square1-Blog.git
 Install Dependencies
 
 ```
-Composer install
+composer install
 ```
 
 Copy the .env.example into .env
@@ -37,7 +37,7 @@ Admin credentials
 
 ```
 email:    admin@admin.com
-password: 12345678
+password: 123456
 ```
 
 Run the project

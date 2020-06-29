@@ -33,12 +33,12 @@ class PostController extends Controller
         $posts = Post::with('author')
         ->where('user_id', auth()->user()->id)
         ->orderBy('publication_date', session('sort_panel'))
-        ->paginate(15);
+        ->paginate(10);
         
         if (auth()->user()->is_admin)
         $posts = Post::with('author')
         ->orderBy('publication_date', session('sort_panel'))
-        ->paginate(15);  
+        ->paginate(10);  
         
         
         
