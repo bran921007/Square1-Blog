@@ -36,3 +36,13 @@ test('User cannot see post from other users in their admin panel', function () {
         ->assertStatus(200)
         ->assertDontSee($randomPost->title);
 });
+
+// test('Check if store function uses PostRequest Validator',function(){
+
+//     $this->assertActionUsesFormRequest(
+//         PostController::class,
+//         'store',
+//         PostRequest::class
+//     );
+// });
+

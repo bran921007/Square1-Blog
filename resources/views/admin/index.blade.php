@@ -40,15 +40,15 @@
                             </div>
                         </div>
                         <div class="mt-1 flex items-center ">
-                            <form class="ml-auto" action="{{ route('order')}}" method="post">
+                            <form class="ml-auto" action="{{ route('order.panel')}}" method="post">
                                 @csrf
                                 <select
                                     class=" sm:text-sm sm:leading-5 w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded focus:outline-none focus:shadow-outline"
                                     name="sort" id="" onchange='if(this.value != 0) { this.form.submit(); }'>
                                     <option value="0">Filter by Publication Date</option>
-                                    <option value="asc" {{ session()->get('sort') == 'asc' ? 'selected' : '' }}>Oldest
+                                    <option value="asc" {{ session()->get('sort_panel') == 'asc' ? 'selected' : '' }}>Oldest
                                         Posts</option>
-                                    <option value="desc" {{ session()->get('sort') == 'desc' ? 'selected' : '' }}>
+                                    <option value="desc" {{ session()->get('sort_panel') == 'desc' ? 'selected' : '' }}>
                                         Lastest Posts</option>
                                 </select>
                             </form>

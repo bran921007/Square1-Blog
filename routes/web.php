@@ -22,12 +22,13 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::post('/order', 'HomeController@sortByPublicationDate')->name('order');
 Route::get('/post/{slug}', 'HomeController@getPost')->name('post');
 
-Route::get('testing', 'PostController@importExternalPosts');
+// Route::get('testing', 'PostController@importExternalPosts');
 
 Route::group(['middleware' => 'auth','prefix'=>'panel'], function () {
 
     Route::get('/home', 'PostController@index')->name('dashboard');
     Route::get('/post/create', 'PostController@create')->name('post.create');
     Route::post('/post/store', 'PostController@store')->name('post.store');
+    Route::post('/order', 'PostController@sortByPublicationDate')->name('order.panel');
 
 });

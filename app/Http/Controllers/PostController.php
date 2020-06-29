@@ -18,45 +18,42 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $post;
+    private $user;
 
     public function __construct(Post $post)
     {
+        
         $this->post = $post;
+        if (!session()->has('sort_panel')) session()->put('sort_panel', 'desc');
     }
 
     public function index()
     {
-        
+
         // $currentPage = request()->get('page',1);
 
-    //    $posts = Cache::remember($this->post->cacheKey().'-'.$currentPage,60,function(){
+        //    $posts = Cache::remember($this->post->cacheKey().'-'.$currentPage,60,function(){
+        $posts = Post::with('author')
+                     ->where('user_id', auth()->user()->id)
+                     ->orderBy('publication_date', session('sort_panel'))
+                     ->paginate(15);
 
+        if (auth()->user()->is_admin)
             $posts = Post::with('author')
-                                ->where('user_id', auth()->user()->id)
-                                ->paginate(10);
-    //    });
+                            ->orderBy('publication_date', session('sort_panel'))
+                            ->paginate(15);  
+        
         
                    
         return view('admin.index', compact('posts'));
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(PostRequest $request)
     {
         $post = new Post([
@@ -64,7 +61,6 @@ class PostController extends Controller
             'slug'  => $request->title,
             'description' =>  $request->description,
             'publication_date' => now(),
-            //    'user_id ' => auth()->user()->id
         ]);
        
         $user = auth()->user();
@@ -74,16 +70,23 @@ class PostController extends Controller
         return redirect()->route('dashboard')->with('status','Post created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $post = Post::findOrFail($id);
         return view('dashboard.show',compact('post'));
+    }
+
+    public function sortByPublicationDate(Request $request)
+    {
+
+        // $currentPage = request()->get('page', 1);
+        // cache()->forget($this->post->cacheKey() . '-' . $currentPage);
+
+        session()->forget('sort_panel');
+        session()->put('sort_panel', $request->sort);
+
+        return redirect()->back();
     }
 
     public function importExternalPosts()
