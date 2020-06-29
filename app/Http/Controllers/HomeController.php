@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Cache;
 use Illuminate\Http\Request;
+use Session;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         $currentPage = request()->get('page', 1);
-
+        
         $posts = Cache::remember($this->post->cacheKey() . '-' . $currentPage, 60, function () {
             return Post::with('author')
                     ->orderBy('publication_date', session('sort'))
@@ -50,6 +51,10 @@ class HomeController extends Controller
 
     public function sortByPublicationDate(Request $request)
     {
+
+        $currentPage = request()->get('page', 1);        
+        cache()->forget($this->post->cacheKey() . '-' . $currentPage);  
+
         session()->forget('sort');
         session()->put('sort', $request->sort);
 
