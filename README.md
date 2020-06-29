@@ -67,6 +67,14 @@ php artisan queue:work
 ```
 php artisan schedule:run
 ```
+
+Add Scheduler task to your crontab:
+```
+crontab -l > mycron
+echo "* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1" >> mycron
+crontab mycron
+rm mycron
+```
 ##  Testing
 
 Pest is a new Laravel framework for testing, a friendly one, based on PHPUnit.
