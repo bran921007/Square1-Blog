@@ -10,8 +10,11 @@
 <main>
   <div class="container mx-auto px-5 lg:max-w-screen-lg mt-20 mb-10">
     
-    <x-alert/>
-    <x-error/>
+   @if (session('status'))
+        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-4" role="alert">
+          {{ session('status') }}
+        </div>
+    @endif
 
   <div class="flex flex-col">
 
