@@ -4,7 +4,7 @@ use App\Post;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class);
+// uses(RefreshDatabase::class);
 
 test('Guest can register', function () {
 
