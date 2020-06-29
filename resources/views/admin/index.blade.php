@@ -14,7 +14,6 @@
     <x-error/>
 
   <div class="flex flex-col">
-    
 
       <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
@@ -26,15 +25,24 @@
                     My Posts
                   </h3>
                 </div>
-                <div class="mr-2">
+                <div class="">
                   <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:mt-0 sm:w-auto">
               <a href="{{route('post.create')}}" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                 Publish Post
               </a>
             </span>
-                </div>
-              
+                </div>           
               </div>
+              <div class="mt-1 flex items-center ">
+            <form class="ml-auto" action="{{ route('order')}}" method="post">
+             @csrf
+           <select class=" sm:text-sm sm:leading-5 w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded focus:outline-none focus:shadow-outline" name="sort" id="" onchange='if(this.value != 0) { this.form.submit(); }'>
+            <option value="0">Filter by Publication Date</option>
+            <option value="asc" {{ session()->get('sort') == 'asc' ? 'selected' : '' }}>Oldest Posts</option>
+            <option value="desc" {{ session()->get('sort') == 'desc' ? 'selected' : '' }}>Lastest Posts</option>
+           </select>
+           </form>
+                </div>
             </div>
 
           <table class="min-w-full">
